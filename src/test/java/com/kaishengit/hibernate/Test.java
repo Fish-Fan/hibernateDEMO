@@ -159,7 +159,6 @@ public class Test {
         for(Account account : accountList) {
             System.out.println(account.getUsername() + " -> " + account.getAddress());
         }
-
         session.getTransaction().commit();
     }
 
