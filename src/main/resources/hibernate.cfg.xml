@@ -33,6 +33,13 @@
 
         <!--注册hbm映射文件-->
         <mapping resource="hbm/Account.hbm.xml"/>
-
+        <mapping resource="hbm/User.hbm.xml"/>
+        <mapping resource="hbm/Address.hbm.xml"/>
+        <mapping resource="hbm/Student.hbm.xml"/>
+        <mapping resource="hbm/Teacher.hbm.xml"/>
+        <mapping resource="hbm/Person.hbm.xml"/>
+        <mapping resource="hbm/Card.hbm.xml"/>
+        <mapping resource="hbm/Passage.hbm.xml"/>
+        <mapping resource="hbm/PassageContent.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
