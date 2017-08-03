@@ -35,13 +35,13 @@ public class OneToOne extends BaseTest{
 
         //测试双向查询
 
-        Person person = (Person) session.get(Person.class,21);
+        Person person = (Person) session.get(Person.class,27);
         System.out.println(person.getPersonName());
         System.out.println(person.getCard().getCardNum());
 
         System.out.println("---------------------------");
 
-        Card card = (Card) session.get(Card.class,21);
+        Card card = (Card) session.get(Card.class,27);
 
         System.out.println(card.getCardNum());
         Person person1 = card.getPerson();

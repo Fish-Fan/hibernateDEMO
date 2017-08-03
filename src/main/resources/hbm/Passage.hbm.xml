@@ -8,6 +8,6 @@
             <generator class="native"/>
         </id>
         <property name="title" column="title"/>
-        <one-to-one name="passageContent" property-ref="passage"/>
+        <many-to-one name="passageContent" column="content_id" class="PassageContent" unique="true"/>
     </class>
 </hibernate-mapping>

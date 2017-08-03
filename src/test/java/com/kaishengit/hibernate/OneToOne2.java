@@ -23,28 +23,30 @@ public class OneToOne2 extends BaseTest {
         passageContent.setPassage(passage);
 
 
-        session.save(passage);
         session.save(passageContent);
+        session.save(passage);
+
 
 
     }
 
     @Test
     public void find() {
-        //从从到主的单向外键查询
-//        Passage passage = (Passage) session.get(Passage.class,10);
-//
-//        System.out.println(passage.getTitle());
-//
-//        PassageContent passageContent = passage.getPassageContent();
-//
-//        System.out.println(passageContent.getContent());
+        //从多向一查询
+        //有延时加载
+        Passage passage = (Passage) session.get(Passage.class,13);
 
-        //从主到从的单向外键查询
+        System.out.println(passage.getTitle());
+
+        PassageContent passageContent = passage.getPassageContent();
+
+        System.out.println(passageContent.getContent());
+
+        //从一向多查询
         //无延时加载
-//        PassageContent passageContent1 = (PassageContent) session.get(PassageContent.class,7);
-//        System.out.println(passageContent1.getContent());
-//        Passage passage1 = passageContent1.getPassage();
-//        System.out.println(passage1.getTitle());
+        PassageContent passageContent1 = (PassageContent) session.get(PassageContent.class,11);
+        System.out.println(passageContent1.getContent());
+        Passage passage1 = passageContent1.getPassage();
+        System.out.println(passage1.getTitle());
     }
 }
