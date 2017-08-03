@@ -24,6 +24,15 @@
         <property name="c3p0.acquire_increment">2</property>
         <property name="c3p0.validate">false</property>
 
+        <!--开启二级缓存-->
+        <property name="cache.use_second_level_cache">true</property>
+        <!--选择二级缓存的实现类-->
+        <property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+        <!-- 指定缓存配置文件位置 -->
+        <property name="hibernate.cache.provider_configuration_file_resource_path">
+            ehcache.xml
+        </property>
+
         <!--将生成的SQL显示在控制台上-->
         <property name="show_sql">true</property>
         <!--将当前的session绑定到线程上-->

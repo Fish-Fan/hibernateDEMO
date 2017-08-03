@@ -11,6 +11,9 @@
         table : 表的名称
     -->
     <class name="Account" table="account">
+        <!--开启二级缓存，可读可写-->
+        <cache usage="read-write"/>
+
         <!--
             该节点用于配置注解列
             name : 类中属性的名称

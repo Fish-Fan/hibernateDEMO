@@ -1,6 +1,8 @@
 package com.kaishengit.hibernate;
 
 import com.kaishengit.pojo.Account;
+import com.kaishengit.pojo.Address;
+import com.kaishengit.pojo.User;
 import com.kaishengit.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,6 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.Set;
 
 public class Test {
 
@@ -91,14 +94,25 @@ public class Test {
 
     @org.junit.Test
     public void findById() {
+
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
 
-        Account account = (Account) session.get(Account.class,22);
+        Account account = (Account) session.get(Account.class,1);
         //System.out.println(account.getUsername());
         session.getTransaction().commit();
 
-        Assert.assertNull(account);
+        System.out.println("-----------------------------------");
+
+        Session session1 = HibernateUtil.getSession();
+        session1.getTransaction().begin();
+
+        Account account1 = (Account) session1.get(Account.class,1);
+        System.out.println(account.getUsername());
+        session1.getTransaction().commit();
+
+
+
 
     }
 
@@ -160,6 +174,22 @@ public class Test {
             System.out.println(account.getUsername() + " -> " + account.getAddress());
         }
         session.getTransaction().commit();
+    }
+
+    @org.junit.Test
+    public void cacheTest() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        User user = (User) session.get(User.class,1);
+        System.out.println(user.getUsername());
+        session.getTransaction().commit();
+
+
+        Set<Address> addressSet = user.getAddressSet();
+        for(Address address: addressSet) {
+            System.out.println(address.getAddress());
+        }
     }
 
 }

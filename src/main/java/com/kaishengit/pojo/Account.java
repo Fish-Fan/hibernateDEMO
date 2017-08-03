@@ -1,5 +1,7 @@
 package com.kaishengit.pojo;
 
+import java.io.Serializable;
+
 public class Account {
 
     private Integer id;
