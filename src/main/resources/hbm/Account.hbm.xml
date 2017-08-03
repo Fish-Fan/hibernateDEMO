@@ -23,9 +23,13 @@
         <id name="id" column="id">
             <!--用于指定主键生成策略
                 native : 自动增长
+                uuid: uuid增长策略
             -->
-            <generator class="native"/>
+            <generator class="uuid"/>
         </id>
+
+        <!--放在id与普通属性之间-->
+        <!--<version name="version"/>-->
 
         <!--
             配置非主键列和属性的对应关系
@@ -35,6 +39,8 @@
         <property name="username" column="username"/>
         <property name="address"/>
         <property name="age"/>
+
+
 
 
     </class>

@@ -2,18 +2,20 @@ package com.kaishengit.pojo;
 
 import java.io.Serializable;
 
-public class Account {
+public class Account implements Serializable{
 
-    private Integer id;
+    //设置主键增长策略为uuid
+    private String id;
     private String username;
     private String address;
     private Integer age;
+    private Integer version;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,6 +41,14 @@ public class Account {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override

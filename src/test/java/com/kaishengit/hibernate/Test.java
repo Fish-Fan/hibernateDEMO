@@ -4,10 +4,7 @@ import com.kaishengit.pojo.Account;
 import com.kaishengit.pojo.Address;
 import com.kaishengit.pojo.User;
 import com.kaishengit.util.HibernateUtil;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -142,7 +139,7 @@ public class Test {
         session.getTransaction().begin();
 
         Account account = (Account) session.get(Account.class,1);
-        account.setUsername("张三丰");
+        account.setUsername("张三丰1");
 
         session.getTransaction().commit();
     }
@@ -177,19 +174,87 @@ public class Test {
     }
 
     @org.junit.Test
-    public void cacheTest() {
+    public void uuidTest() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
-        User user = (User) session.get(User.class,1);
-        System.out.println(user.getUsername());
+        String uuid = "402881c15da6b88d015da6b890090000";
+        Account account = (Account) session.get(Account.class,uuid);
+
+        System.out.println(account.getUsername());
+    }
+
+    @org.junit.Test
+    public void goodLockTest() throws InterruptedException {
+        final Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        final String id = "ff8080815da710b0015da710b3310000";
+        Account account = (Account) session.get(Account.class,id);
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+
+
+                //另外一个session对account操作
+                Session session1 = HibernateUtil.getSession();
+                session1.beginTransaction();
+
+                Account account1 = (Account) session1.get(Account.class,id);
+
+                account1.setUsername("赵四");
+                session1.update(account1);
+
+                session1.getTransaction().commit();
+            }
+        });
+
+        thread.start();
+
+        Thread.sleep(3000);
+
+        //最开始的session对account进行修改
+
+        //最开始的session对对象进行更新操作时,version已经被后一个session更新了，该种情况下会抛出org.hibernate.StaleObjectStateException异常
+        account.setUsername("王麻子");
         session.getTransaction().commit();
+    }
 
+    @org.junit.Test
+    public void badLockTest() throws InterruptedException {
 
-        Set<Address> addressSet = user.getAddressSet();
-        for(Address address: addressSet) {
-            System.out.println(address.getAddress());
-        }
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        final String id = "ff8080815da710b0015da710b3310000";
+        //对该行加上悲观锁
+        Account account = (Account) session.get(Account.class,id, LockOptions.UPGRADE);
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                Session session1 = HibernateUtil.getSession();
+                session1.beginTransaction();
+
+                Account account1 = (Account) session1.get(Account.class,id);
+
+                account1.setUsername("李建国");
+
+                session1.getTransaction().commit();
+                System.out.println("名称已变更为李建国");
+            }
+        });
+
+        thread.start();
+
+        Thread.sleep(3000);
+
+        account.setUsername("李远超");
+        session.getTransaction().commit();
+        System.out.println("名称已变更为李远超");
+
+        //最终程序执行结果为李建国
+        //子线程一直在等待主线程执行完毕，当主线程将名字修改为李远超后，悲观锁失效，子线程将名称修改为李建国
+
     }
 
 }

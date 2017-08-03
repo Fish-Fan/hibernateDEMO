@@ -44,7 +44,7 @@ public class NativeTest {
 
         for(Object[] arr: accountList) {
             Account account = new Account();
-            account.setId(Integer.valueOf(arr[0].toString()));
+            account.setId(arr[0].toString());
             account.setUsername(arr[1].toString());
             account.setAddress(arr[2].toString().equals("") ? "默认地址" : arr[2].toString());
             account.setAge(Integer.valueOf(arr[3] == null ? "0" : arr[3].toString()));
