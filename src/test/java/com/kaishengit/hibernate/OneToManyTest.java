@@ -62,7 +62,7 @@ public class OneToManyTest extends BaseTest {
     @Test
     public void delete() {
 
-        User user = (User) session.get(User.class,8);
+        User user = (User) session.get(User.class,16);
         session.delete(user);
 
     }

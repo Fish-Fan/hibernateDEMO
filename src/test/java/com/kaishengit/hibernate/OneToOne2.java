@@ -20,7 +20,7 @@ public class OneToOne2 extends BaseTest {
         passageContent.setContent("小说A的内容");
 
         passage.setPassageContent(passageContent);
-        passageContent.setPassage(passage);
+//        passageContent.setPassage(passage);
 
 
         session.save(passageContent);
@@ -46,7 +46,7 @@ public class OneToOne2 extends BaseTest {
         //无延时加载
         PassageContent passageContent1 = (PassageContent) session.get(PassageContent.class,11);
         System.out.println(passageContent1.getContent());
-        Passage passage1 = passageContent1.getPassage();
-        System.out.println(passage1.getTitle());
+//        Passage passage1 = passageContent1.getPassage();
+//        System.out.println(passage1.getTitle());
     }
 }

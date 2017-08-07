@@ -51,10 +51,12 @@ public class Test {
     @org.junit.Test
     public void updateAccount() {
 
+        String id = "ff8080815da710b0015da710b3310000";
+
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
-        Account account = (Account) session.get(Account.class,6); //持久态
+        Account account = (Account) session.get(Account.class,id); //持久态
 
         session.getTransaction().commit(); // 游离态
 

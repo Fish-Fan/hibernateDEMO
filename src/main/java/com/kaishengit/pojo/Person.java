@@ -1,12 +1,23 @@
 package com.kaishengit.pojo;
 
+import javax.persistence.*;
+
 /**
  * Created by yanfeng-mac on 2017/8/2.
  */
+@Entity
+@Table(name = "person")
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column(name = "person_name")
     private String personName;
 
+    //共享主键关联使用PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Card card;
 
     public Integer getId() {

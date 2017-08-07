@@ -1,10 +1,21 @@
 package com.kaishengit.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
+@Entity
+@Table
 public class Account implements Serializable{
 
     //设置主键增长策略为uuid
+    @Id
+    @GenericGenerator(name = "myUuid", strategy = "uuid")
+    @GeneratedValue(generator = "myUuid")
     private String id;
     private String username;
     private String address;

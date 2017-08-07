@@ -1,13 +1,26 @@
 package com.kaishengit.pojo;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Set;
 
 /**
  * Created by yanfeng-mac on 2017/8/1.
  */
+@Entity
+@Table
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DELETE)
     private Set<Address> addressSet;
 
     public Integer getId() {

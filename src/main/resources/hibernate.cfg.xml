@@ -41,14 +41,25 @@
         <property name="current_session_context_class">thread</property>
 
         <!--注册hbm映射文件-->
-        <mapping resource="hbm/Account.hbm.xml"/>
-        <mapping resource="hbm/User.hbm.xml"/>
-        <mapping resource="hbm/Address.hbm.xml"/>
-        <mapping resource="hbm/Student.hbm.xml"/>
-        <mapping resource="hbm/Teacher.hbm.xml"/>
-        <mapping resource="hbm/Person.hbm.xml"/>
-        <mapping resource="hbm/Card.hbm.xml"/>
+        <!--<mapping resource="hbm/Account.hbm.xml"/>-->
+        <!--<mapping resource="hbm/User.hbm.xml"/>-->
+        <!--<mapping resource="hbm/Address.hbm.xml"/>-->
+        <!--<mapping resource="hbm/Student.hbm.xml"/>-->
+        <!--<mapping resource="hbm/Teacher.hbm.xml"/>-->
+        <!--<mapping resource="hbm/Person.hbm.xml"/>-->
+        <!--<mapping resource="hbm/Card.hbm.xml"/>-->
         <mapping resource="hbm/Passage.hbm.xml"/>
         <mapping resource="hbm/PassageContent.hbm.xml"/>
+
+        <!--基于注解的hbm映射文件-->
+        <mapping class="com.kaishengit.pojo.Account"/>
+        <mapping class="com.kaishengit.pojo.User"/>
+        <mapping class="com.kaishengit.pojo.Address"/>
+        <mapping class="com.kaishengit.pojo.Student"/>
+        <mapping class="com.kaishengit.pojo.Teacher"/>
+        <mapping class="com.kaishengit.pojo.Card"/>
+        <mapping class="com.kaishengit.pojo.Person"/>
+        <!--<mapping class="com.kaishengit.pojo.Passage"/>-->
+        <!--<mapping class="com.kaishengit.pojo.PassageContent"/>-->
     </session-factory>
 </hibernate-configuration>

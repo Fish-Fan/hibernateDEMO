@@ -25,7 +25,8 @@ public class OneToOne extends BaseTest{
         card.setPerson(person);
 
         //保存person的同时，会自动保存card
-        session.save(person);
+//        session.save(person);
+        session.save(card);
     }
 
     @Test
@@ -44,8 +45,8 @@ public class OneToOne extends BaseTest{
         Card card = (Card) session.get(Card.class,27);
 
         System.out.println(card.getCardNum());
-        Person person1 = card.getPerson();
-        System.out.println(card.getPerson().getPersonName());
+//        Person person1 = card.getPerson();
+//        System.out.println(card.getPerson().getPersonName());
     }
 
 }

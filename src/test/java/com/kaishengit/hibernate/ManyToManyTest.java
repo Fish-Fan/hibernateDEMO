@@ -27,19 +27,20 @@ public class ManyToManyTest extends BaseTest {
         Teacher t2 = new Teacher();
         t2.setTeacherName("t2");
 
-//        Set<Teacher> teacherSet = new HashSet<Teacher>();
-//        teacherSet.add(t1);
-//        teacherSet.add(t2);
+        //使用注解后，主动方被设置为student
+        Set<Teacher> teacherSet = new HashSet<Teacher>();
+        teacherSet.add(t1);
+        teacherSet.add(t2);
+
+        s1.setTeacherSet(teacherSet);
+        s2.setTeacherSet(teacherSet);
+
+//        Set<Student> studentSet = new HashSet<Student>();
+//        studentSet.add(s1);
+//        studentSet.add(s2);
 //
-//        s1.setTeacherSet(teacherSet);
-//        s2.setTeacherSet(teacherSet);
-
-        Set<Student> studentSet = new HashSet<Student>();
-        studentSet.add(s1);
-        studentSet.add(s2);
-
-        t1.setStudentSet(studentSet);
-        t2.setStudentSet(studentSet);
+//        t1.setStudentSet(studentSet);
+//        t2.setStudentSet(studentSet);
 
 
 
